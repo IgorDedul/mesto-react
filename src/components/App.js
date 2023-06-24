@@ -71,7 +71,7 @@ function App() {
         <Footer />
 
         <PopupWithForm name="form-avatar" title="Обновить аватар" buttonText='Сохранить' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-            <label class="popup__field">
+            <label className="popup__field">
               <input 
                   id="avatar-input"
                   autoComplete="off"
@@ -86,7 +86,7 @@ function App() {
         </PopupWithForm>
         
         <PopupWithForm name="edit-profile" title="Редактировать профиль" buttonText="Сохранить" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
-          <label class="popup__field">  
+          <label className="popup__field">  
             <input
                 type="text"
                 id="name-input"
@@ -99,7 +99,7 @@ function App() {
             />
             <span id="name-input-error" className="popup__input-error"/>
           </label>
-          <label class="popup__field">  
+          <label className="popup__field">  
             <input
                 type="text"
                 id="about-input"
@@ -115,7 +115,7 @@ function App() {
         </PopupWithForm>
         
         <PopupWithForm name="add-element" title="Новое место" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
-          <label class="popup__field">
+          <label className="popup__field">
             <input
               type="text"
               name="title"
