@@ -1,10 +1,13 @@
 import React from "react";
 import Card from "./Card";
-const CurrentUserContext = React.createContext();
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick, onCardLike, onCardDelete}) {
-    const currentUser = React.useContext(CurrentUserContext); 
-    
+
+function Main({onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick, onCardLike, onCardDelete, userData}) {
+
+  const userAvatar = userData.avatar;
+  const userName = userData.name;
+  const userDescription = userData.about;
+
     return (
       <>
          <main>
@@ -12,7 +15,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick, onCa
               <div className="profile__container">
                 <div className="profile__container-avatar">
                   <img 
-                    src={currentUser.avatar} 
+                    src={userAvatar} 
                     alt="Фото-аватар" 
                     className="profile__avatar"
                   />
@@ -25,7 +28,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick, onCa
                 </div>
                 <div className="profile__describe">
                   <div className="profile__title-wrapper">
-                    <h1 className="profile__title">{currentUser.name}</h1>
+                    <h1 className="profile__title">{userName}</h1>
                     <button 
                         onClick={onEditProfile}
                         className="profile__edit-button" 
@@ -33,7 +36,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick, onCa
                         aria-label="Редактировать профиль">
                     </button>
                   </div>
-                  <p className="profile__subtitle">{currentUser.about}</p>
+                  <p className="profile__subtitle">{userDescription}</p>
                 </div>
               </div>
               <button 
@@ -45,17 +48,19 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick, onCa
             </section>
 
             <section className="element">
-              {cards.map((card) => {
-          return (
-            <Card
-              key={card._id}
-              card={card}
-              onCardClick={onCardClick}
-              onCardLike={onCardLike}
-              onCardDeleteClick={onCardDelete}
-            />
-          );
-        })}
+              <div className ="element__list">
+                {cards.map((card) => {
+                  return (
+                    <Card
+                      key={card._id}
+                      card={card}
+                      onCardClick={onCardClick}
+                      onCardLike={onCardLike}
+                      onCardDeleteClick={onCardDelete}
+                    />
+                  );
+                })}
+              </div>
             </section>  
         </main>
       </>
