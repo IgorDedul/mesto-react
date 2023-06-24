@@ -6,10 +6,6 @@ import Footer from "./Footer";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import PopupWithForm from "./PopupWithForm";
-//import EditProfilePopup from "./EditProfilePopup";
-//import EditAvatarPopup from "./EditAvatarPopup";
-//import AddPlacePopup from "./AddPlacePopup";
-//import PopupWithConfirmation from "./PopupWithConfirmation";
 
 
 function App() {
@@ -75,19 +71,22 @@ function App() {
         <Footer />
 
         <PopupWithForm name="form-avatar" title="Обновить аватар" buttonText='Сохранить' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-            <input 
-                id="avatar-input"
-                autoComplete="off"
-                type="url"
-                name="avatarLink"
-                className="popup__input popup__url-input-avatar"
-                placeholder="Ссылка на картинку"
-                required
-            />
-            <span id="avatar-input-error" className="popup__input-error"/> 
+            <label class="popup__field">
+              <input 
+                  id="avatar-input"
+                  autoComplete="off"
+                  type="url"
+                  name="avatarLink"
+                  className="popup__input popup__url-input-avatar"
+                  placeholder="Ссылка на картинку"
+                  required
+              />
+              <span id="avatar-input-error" className="popup__input-error"/>
+            </label>
         </PopupWithForm>
         
         <PopupWithForm name="edit-profile" title="Редактировать профиль" buttonText="Сохранить" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
+          <label class="popup__field">  
             <input
                 type="text"
                 id="name-input"
@@ -99,6 +98,8 @@ function App() {
                 required
             />
             <span id="name-input-error" className="popup__input-error"/>
+          </label>
+          <label class="popup__field">  
             <input
                 type="text"
                 id="about-input"
@@ -110,10 +111,11 @@ function App() {
                 required
             />
             <span id="about-input-error" className="popup__input-error"/>
+          </label>  
         </PopupWithForm>
         
         <PopupWithForm name="add-element" title="Новое место" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
-          <fieldset className="form__set">
+          <label class="popup__field">
             <input
               type="text"
               name="title"
@@ -136,7 +138,7 @@ function App() {
            <span id="link-error" className="form__input-error"></span>
             <button type="submit" className="form__submit" >
             </button>
-          </fieldset>
+          </label>
         </PopupWithForm>
 
         <div className={`popup popup_delete-card ${isConfirmationPopupOpen ? "popup_opened" : ""}`}>

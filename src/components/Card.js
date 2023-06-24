@@ -2,7 +2,7 @@ import React from "react";
 
 const Card = ({ card, onCardClick, onCardLike, onCardDeleteClick }) => {
 
- //Вызовы функций увеличения, лайка, удаления
+ //Вызовы функций увеличения, лайка, удаления. (Лайк и удаление пока не работают.)
   const handleClick = () => {
     onCardClick(card);
   };
