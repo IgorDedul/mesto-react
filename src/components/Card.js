@@ -1,6 +1,11 @@
 import React from "react";
+import { useContext } from "react";
+
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const Card = ({ card, onCardClick, onCardLike, onCardDeleteClick }) => {
+
+  const currentUser = useContext(CurrentUserContext);
 
  //Вызовы функций увеличения, лайка, удаления. (Лайк и удаление пока не работают.)
   const handleClick = () => {
