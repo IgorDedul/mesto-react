@@ -7,6 +7,8 @@ import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import PopupWithForm from "./PopupWithForm";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 
@@ -90,6 +92,30 @@ function App() {
       })
   };
 
+  function handleUpdateAvatar (newData) {
+    api
+      .setUserAvatar(newData)
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+  };
+
+  function handleAddPlaceSubmit (newData) {
+    api
+      .addCard(newData)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+  };
+
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -114,20 +140,11 @@ function App() {
           />
           <Footer />
 
-          <PopupWithForm name="form-avatar" title="Обновить аватар" buttonText='Сохранить' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-              <label className="popup__field">
-                <input 
-                    id="avatar-input"
-                    autoComplete="off"
-                    type="url"
-                    name="avatarLink"
-                    className="popup__input popup__url-input-avatar"
-                    placeholder="Ссылка на картинку"
-                    required
-                />
-                <span id="avatar-input-error" className="popup__input-error"/>
-              </label>
-          </PopupWithForm>
+          <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
           
           <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
@@ -135,32 +152,11 @@ function App() {
           onUpdateUser={handleUpdateUser}
         />
           
-          <PopupWithForm name="add-element" title="Новое место" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
-            <label className="popup__field">
-              <input
-                type="text"
-                name="title"
-                id="title"
-                placeholder="Название"
-                minLength="2"
-                maxLength="30"
-                className="popup__input popup__place-input"
-                required
-              />
-            <span id="title-error" className="form__input-error"></span>
-              <input
-                type="url"
-                name="link"
-                id="link"
-                placeholder="Ссылка на картинку"
-                className="popup__input popup__url-input"
-                required
-              />
-            <span id="link-error" className="form__input-error"></span>
-              <button type="submit" className="form__submit" >
-              </button>
-            </label>
-          </PopupWithForm>
+          <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlace={handleAddPlaceSubmit}
+        />
 
           <div className={`popup popup_delete-card ${isConfirmationPopupOpen ? "popup_opened" : ""}`}>
             <div className="popup__container">
