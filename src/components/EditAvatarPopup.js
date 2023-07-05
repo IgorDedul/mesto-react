@@ -28,6 +28,7 @@ const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar}) => {
                 />
                 <span id="avatar-input-error" className="popup__input-error"/>
             </label>
+            <button class="popup__save-button" type="submit" aria-label="Сохранить">Сохранить</button>
         </PopupWithForm>
     )
 };

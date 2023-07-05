@@ -30,7 +30,9 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
             ref={name}
             required
           />
-        <span id="title-error" className="form__input-error"></span>
+        <span id="title-error" className="popup__input-error"></span>
+        </label>
+        <label className="popup__field">  
           <input
             type="url"
             name="link"
@@ -40,8 +42,9 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
             ref={link}
             required
           />
-        <span id="link-error" className="form__input-error"></span>
+        <span id="link-error" className="popup__input-error"></span>
         </label>
+        <button class="popup__save-button" type="submit" aria-label="Создать">Создать</button>
       </PopupWithForm>
     )
 };

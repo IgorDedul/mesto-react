@@ -72,7 +72,8 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser}) => {
               required
           />
           <span id="about-input-error" className="popup__input-error"/>
-        </label>  
+        </label>
+        <button class="popup__save-button" type="submit" aria-label="Сохранить">Сохранить</button>  
       </PopupWithForm>
     );
   };
