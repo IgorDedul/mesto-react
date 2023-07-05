@@ -12,8 +12,7 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
         onAddPlace({
             name: name.current.value,
             link: link.current.value
-        });
-    console.log(name);    
+        });   
     };
 
 
@@ -42,8 +41,6 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
             required
           />
         <span id="link-error" className="form__input-error"></span>
-          <button type="submit" className="form__submit" >
-          </button>
         </label>
       </PopupWithForm>
     )

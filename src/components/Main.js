@@ -5,7 +5,7 @@ import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick, onCardLike, onCardDelete}) {
+function Main({onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick, onCardLike, onCardDeleteClick}) {
 
   const currentUser = useContext(CurrentUserContext);
   const { name, about, avatar } = currentUser;
@@ -58,7 +58,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick, onCa
                       card={card}
                       onCardClick={onCardClick}
                       onCardLike={onCardLike}
-                      onCardDeleteClick={onCardDelete}
+                      onCardDeleteClick={onCardDeleteClick}
                     />
                   );
                 })}

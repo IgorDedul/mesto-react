@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
 
@@ -18,6 +18,16 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser}) => {
         setDescription(currentUser.about);
     }, [currentUser]); 
 
+
+    // Функция-обработчик изменения инпута имени обновляет стейт name
+    function handleChangeName(e) {
+        setName(e.currentTarget.value);
+    }
+    
+    // Функция-обработчик изменения инпута занятия обновляет стейт description
+    function handleChangeDescription(e) {
+        setDescription(e.currentTarget.value);
+    }
 
     function handleSubmit(e) {
         // Запрещаем браузеру переходить по адресу формы
@@ -42,7 +52,8 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser}) => {
               placeholder="Имя"
               minLength="2"
               maxLength="40"
-              onChange={name}
+              onChange={handleChangeName}
+              value={name}
               required
           />
           <span id="name-input-error" className="popup__input-error"/>
@@ -56,7 +67,8 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser}) => {
               placeholder="О себе"
               minLength="2"
               maxLength="200"
-              onChange={description}
+              onChange={handleChangeDescription}
+              value={description}
               required
           />
           <span id="about-input-error" className="popup__input-error"/>

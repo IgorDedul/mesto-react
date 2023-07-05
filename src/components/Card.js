@@ -47,7 +47,7 @@ const Card = ({ card, onCardClick, onCardLike, onCardDeleteClick }) => {
                 <h2 className="element__name">{card.name}</h2>
                 <div className="element__like-container">
                 <button 
-                    className= "element__like"
+                    className= {cardLikeButtonClassName}
                     onClick={handleLikeClick}
                     type="button" 
                     aria-label="Нравится">
