@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import PopupWithForm from "./PopupWithForm";
+import EditProfilePopup from "./EditProfilePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 
@@ -77,6 +78,18 @@ function App() {
       });
   }
 
+  function handleUpdateUser (newUserInfo) {
+    api
+      .setUserInfo(newUserInfo)
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+  };
+
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -116,34 +129,11 @@ function App() {
               </label>
           </PopupWithForm>
           
-          <PopupWithForm name="edit-profile" title="Редактировать профиль" buttonText="Сохранить" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
-            <label className="popup__field">  
-              <input
-                  type="text"
-                  id="name-input"
-                  className="popup__input popup__name-input"
-                  name="userName"
-                  placeholder="Имя"
-                  minLength="2"
-                  maxLength="40"
-                  required
-              />
-              <span id="name-input-error" className="popup__input-error"/>
-            </label>
-            <label className="popup__field">  
-              <input
-                  type="text"
-                  id="about-input"
-                  className="popup__input popup__input_edit-about"
-                  name="about"
-                  placeholder="О себе"
-                  minLength="2"
-                  maxLength="200"
-                  required
-              />
-              <span id="about-input-error" className="popup__input-error"/>
-            </label>  
-          </PopupWithForm>
+          <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
           
           <PopupWithForm name="add-element" title="Новое место" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
             <label className="popup__field">
