@@ -48,6 +48,34 @@ function App() {
     setSelectedCard(card);
   };
 
+  function handleCardLike(card) {
+    // Проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
+  }
+
+  function handleCardDelete(cardId) {
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        setCards((cards) => cards.filter((card) => card._id !== cardId));
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
+  }
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
@@ -68,6 +96,8 @@ function App() {
             onAddPlace={handleAddPlaceClick}
             onCardClick={handleCardClick}
             cards={cards}
+            onCardLike={handleCardLike}
+            onCardDeleteClick={handleCardDelete}
           />
           <Footer />
 
