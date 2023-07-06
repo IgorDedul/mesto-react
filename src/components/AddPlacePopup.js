@@ -17,7 +17,7 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
 
 
     return (
-        <PopupWithForm name="add-element" title="Новое место" isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
+        <PopupWithForm name="add-element" title="Новое место" buttonText="Создать" isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
         <label className="popup__field">
           <input
             type="text"
@@ -44,7 +44,6 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
           />
         <span id="link-error" className="popup__input-error"></span>
         </label>
-        <button class="popup__save-button" type="submit" aria-label="Создать">Создать</button>
       </PopupWithForm>
     )
 };
