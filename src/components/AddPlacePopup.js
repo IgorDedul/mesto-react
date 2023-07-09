@@ -1,7 +1,7 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
-const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
+const AddPlacePopup = ({ isOpen, onClose, onAddPlace, onLoading}) => {
   
     const name = React.useRef('');
     const link = React.useRef('');
@@ -17,7 +17,7 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
 
 
     return (
-        <PopupWithForm name="add-element" title="Новое место" buttonText="Создать" isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
+        <PopupWithForm name="add-element" title="Новое место" buttonText="Создать" isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit} isLoading={onLoading}>
         <label className="popup__field">
           <input
             type="text"

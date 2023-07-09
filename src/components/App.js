@@ -22,6 +22,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -81,6 +82,7 @@ function App() {
   }
 
   function handleUpdateUser (newUserInfo) {
+    setIsLoading(true);
     api
       .setUserInfo(newUserInfo)
       .then((data) => {
@@ -90,9 +92,13 @@ function App() {
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   function handleUpdateAvatar (newData) {
+    setIsLoading(true);
     api
       .setUserAvatar(newData)
       .then((data) => {
@@ -102,9 +108,13 @@ function App() {
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   function handleAddPlaceSubmit (newData) {
+    setIsLoading(true);
     api
       .addCard(newData)
       .then((newCard) => {
@@ -114,6 +124,9 @@ function App() {
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const closeAllPopups = () => {
@@ -144,18 +157,21 @@ function App() {
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
+          onLoading={isLoading}
         />
           
           <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+          onLoading={isLoading}
         />
           
           <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
+          onLoading={isLoading}
         />
 
           <div className={`popup popup_delete-card ${isConfirmationPopupOpen ? "popup_opened" : ""}`}>

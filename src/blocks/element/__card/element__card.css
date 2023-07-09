@@ -4,6 +4,8 @@
   border-radius: 10px;
   overflow: hidden;
   position: relative;
-  max-width: 288px;
+  display: flex;
+  flex-direction: column;
+  width: 282px;
   }
   

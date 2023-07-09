@@ -1,5 +1,7 @@
 .element__border {
     display: flex;
+    position: relative;
+    bottom: 0px;
     justify-content: space-between;
     align-items: center;
     padding: 20px;

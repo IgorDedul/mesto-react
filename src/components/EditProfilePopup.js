@@ -3,12 +3,12 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
 
-const EditProfilePopup = ({ isOpen, onClose, onUpdateUser}) => {
+const EditProfilePopup = ({ isOpen, onClose, onUpdateUser, onLoading}) => {
     const currentUser = useContext(CurrentUserContext);
 
     // Переменные с стейтами имени и информации о пользователе
-    const [name, setName] = React.useState([]);
-    const [description, setDescription] = React.useState([]);
+    const [name, setName] = React.useState('');
+    const [description, setDescription] = React.useState('');
   
  
     // После загрузки текущего пользователя из API
@@ -42,7 +42,7 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser}) => {
   
 
     return (
-        <PopupWithForm name="edit-profile" title="Редактировать профиль" buttonText="Сохранить" isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
+        <PopupWithForm name="edit-profile" title="Редактировать профиль" buttonText="Сохранить" isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit} isLoading={onLoading}>
         <label className="popup__field">  
           <input
               type="text"
@@ -53,7 +53,7 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser}) => {
               minLength="2"
               maxLength="40"
               onChange={handleChangeName}
-              value={name}
+              value={name || ''}
               required
           />
           <span id="name-input-error" className="popup__input-error"/>
@@ -68,7 +68,7 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser}) => {
               minLength="2"
               maxLength="200"
               onChange={handleChangeDescription}
-              value={description}
+              value={description || ''}
               required
           />
           <span id="about-input-error" className="popup__input-error"/>

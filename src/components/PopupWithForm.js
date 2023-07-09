@@ -13,7 +13,7 @@ const PopupWithForm = (props) => {
             className="popup__input-list"
             onSubmit={props.onSubmit}>
             {props.children}
-            <button class="popup__save-button" type="submit" aria-label="Сохранить">{props.buttonText}</button>
+            <button class="popup__save-button" type="submit" aria-label="Сохранить">{props.isLoading ? 'Сохранение...' : props.buttonText}</button>
           </form>
         </div>  
       </div>
